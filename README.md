@@ -14,7 +14,9 @@ Project Requirement Document (What we each worked on)
   * Added more detail to some of the individual functions of Functional Requirements
 
 -Armando Benavidez
-  *
+  * Added more functional requirements and longer descriptions to some of the functions.
+  * Added more GUI functions in the Non-Functinal requirements.
+  * Added access control functions ie permission levels for each user who logs in color coded portal.
 
 -Nithil Sethupathi
   *
