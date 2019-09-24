@@ -19,4 +19,7 @@ Project Requirement Document (What we each worked on)
   * Added access control functions ie permission levels for each user who logs in color coded portal.
 
 -Nithil Sethupathi
-  *
+  * Added the user access and the user type we will mainly be focusing on this project.
+  * Added security in the Non-Functional requirements
+  * Expanded application alnguages, and made some changes to the project requirement based on the application language changes.
+  * Expaned and added more detail to the non-functional requirements
