@@ -13,8 +13,6 @@ router.get('/', function(req, res, next){
         if (err){
         console.log ('error');
         return
-      } else{
-        res.send('Connection Successful');
       }
 
 });
@@ -24,7 +22,7 @@ connection.query('select * from emp', function (err, rows, fields) {
       console.log ('error');
       return
     } else{
-      console.log('The solution is: ', rows)
+      res.send(JSON.stringify(rows));
     }
 });
 connection.end();
