@@ -5,7 +5,7 @@ function App(){
   //   this.state = { apiResponse: ""};
   // }
   const callIndex = () => {
-    fetch("http://localhost:8000/users")
+    fetch("http://localhost:8000/database")
         .then(res => res.text())
         .then(res => setApiResponse(res))
         .catch(err => err);
