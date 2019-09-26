@@ -17,6 +17,9 @@ Project Requirement Document (What we each worked on)
   * Added more functional requirements and longer descriptions to some of the functions.
   * Added more GUI functions in the Non-Functinal requirements.
   * Added access control functions ie permission levels for each user who logs in color coded portal.
+  
+  9.26.19
+  * Tested 3 tier architechture for bugs, installed on local machine
 
 -Nithil Sethupathi
   * Added the user access and the user type we will mainly be focusing on this project.
