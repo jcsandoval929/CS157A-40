@@ -40,3 +40,4 @@ Project Requirement Document (What we each worked on)
   * Worked on the entities and relationships of our project
   * Created a draft ER Diagram
   * Adjusted/fixed ER Diagram
+  * Created and worked on Schemas table
