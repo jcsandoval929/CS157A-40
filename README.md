@@ -46,4 +46,4 @@ Project Requirement Document (What we each worked on)
  * Enhanced, improved, and created new entities
  * Added extra attributes
  * Enhanced, improved ER diagram
- * Worked on Schemas tablw
+ * Worked on Schemas table
