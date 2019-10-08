@@ -26,3 +26,15 @@ Project Requirement Document (What we each worked on)
   * Added security in the Non-Functional requirements
   * Expanded application alnguages, and made some changes to the project requirement based on the application language changes.
   * Expaned and added more detail to the non-functional requirements
+  
+  
+  Project Design Document
+  
+-Juan Carlos Sandoval
+  * Worked on some of the bullet points for "Entities"
+  * A few bullet points for "Relationships"
+  * A few bullet points for "Attributes"
+  * Diagram: Defined some of the primary keys and drew relationships for some of the entitites
+  
+-Armando Benavidez
+  * 
