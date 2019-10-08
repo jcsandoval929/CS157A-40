@@ -41,3 +41,9 @@ Project Requirement Document (What we each worked on)
   * Created a draft ER Diagram
   * Adjusted/fixed ER Diagram
   * Created and worked on Schemas table
+
+-Nithil Sethupathi
+ * Enhanced, improved, and created new entities
+ * Added extra attributes
+ * Enhanced, improved ER diagram
+ * Worked on Schemas tablw
