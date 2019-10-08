@@ -35,6 +35,7 @@ Project Requirement Document (What we each worked on)
   * A few bullet points for "Relationships"
   * A few bullet points for "Attributes"
   * Diagram: Defined some of the primary keys and drew relationships for some of the entitites
+  * Worked on Schemas table
   
 -Armando Benavidez
   * Worked on the entities and relationships of our project
