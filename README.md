@@ -37,4 +37,6 @@ Project Requirement Document (What we each worked on)
   * Diagram: Defined some of the primary keys and drew relationships for some of the entitites
   
 -Armando Benavidez
-  * 
+  * Worked on the entities and relationships of our project
+  * Created a draft ER Diagram
+  * Adjusted/fixed ER Diagram
