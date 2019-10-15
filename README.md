@@ -52,11 +52,14 @@ Project Requirement Document (What we each worked on)
  Project Design Document REVISION
  
  -Armando Benavidez
-  * Met up and discussed the ER diagram and at meeting revised the diagram to our liking
-  * Revised ER diagram in our drive folder
-  * Added and removed details specifying certian functions that were added or were no longer needed
-  * Crated tables in mySQL and added them to our database
+ * Met up and discussed the ER diagram and at meeting revised the diagram to our liking
+ * Revised ER diagram in our drive folder
+ * Added and removed details specifying certian functions that were added or were no longer needed
+ * Crated tables in mySQL and added them to our database
  
- -Juan Carlos Sandoval
+-Juan Carlos Sandoval
+ * Met up and discussed our ER design
+ * Revised ER diagram at meeting
+ * Made changes to design and document online
  
  -Nithil Sethupathi
