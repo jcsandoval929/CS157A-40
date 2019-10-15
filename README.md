@@ -48,3 +48,12 @@ Project Requirement Document (What we each worked on)
  * Added extra attributes
  * Enhanced, improved ER diagram
  * Worked on Schemas table
+ 
+ Project Design Document REVISION
+ 
+ -Armando Benavidez
+  *
+ 
+ -Juan Carlos Sandoval
+ 
+ -Nithil Sethupathi
