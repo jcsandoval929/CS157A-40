@@ -1,27 +1,43 @@
-import React, {useState, useEffect} from 'react';
-function App(){
-  const[apiResponse, setApiResponse] = useState('');
-  // const App = (props) => {
-  //   this.state = { apiResponse: ""};
-  // }
-  const callIndex = () => {
-    fetch("http://localhost:8000/database")
-        .then(res => res.text())
-        .then(res => setApiResponse(res))
-        .catch(err => err);
-  }
-  useEffect(() => callIndex(),[]);
-  // const UNSAFE_componentWillMount = () => {
-  //   this.callIndex();
-  // }
-  return (
-      <div className = "App">
-          <header className = "Header">
-              <h1 className = "Title">Welcome to FlyNow</h1>
-          </header>
-          <p className = "Intro">{apiResponse}</p>
-      </div>
-    );
-}
+import React, { useState } from "react";
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import "./Login.css";
 
-export default App;
+export default function App(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function validateForm() {
+    return email.length > 0 && password.length > 0;
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  return (
+    <div className="Login">
+      <form onSubmit={handleSubmit}>
+        <FormGroup controlId="email" bsSize="large">
+          <ControlLabel>Email</ControlLabel>
+          <FormControl
+            autoFocus
+            type="email"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </FormGroup>
+        <FormGroup controlId="password" bsSize="large">
+          <ControlLabel>Password</ControlLabel>
+          <FormControl
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+            type="password"
+          />
+        </FormGroup>
+        <Button block bsSize="large" disabled={!validateForm()} type="submit">
+          Login
+        </Button>
+      </form>
+    </div>
+  );
+}
