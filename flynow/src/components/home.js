@@ -16,7 +16,6 @@ const buttonStyle = {
     fontSize: "20px",
     padding: "20px",
     fontWeight: "normal",
-    //marginBottom: "40px"
 };
 
 class home extends React.Component {
