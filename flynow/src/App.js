@@ -1,10 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import React, {Component} from 'react';
 import {BrowserRouter as Router } from 'react-router-dom'
+=======
+import React, { Component } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom'
+>>>>>>> 9e42585ec00b880cb159fd29d48857b77220fb15
 import BaseRouter from "./routes"
 
-class App extends Component{
+class App extends Component {
 
+<<<<<<< HEAD
   render(){
   return(
   
@@ -47,6 +53,17 @@ function App(){
     </div>
   );
 >>>>>>> nithil
+=======
+    render() {
+        return (
+            <div>
+                <Router>
+                    <BaseRouter />
+                </Router>
+            </div>
+        );
+    }
+>>>>>>> 9e42585ec00b880cb159fd29d48857b77220fb15
 }
 
 export default App;
