@@ -37,7 +37,16 @@ class home extends React.Component {
                         to="/login/"
                         style={buttonStyle}
                     >
-                        Login/Register
+                        Login
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        component={Link}
+                        to="/signup/"
+                        style={buttonStyle}
+                    >
+                        Register
                     </Button>
                 </CardActions>
             </div >
