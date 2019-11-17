@@ -27,4 +27,6 @@ connection.query('select * from emp', function (err, rows, fields) {
 });
 connection.end();
 });
+
+
 module.exports = router;

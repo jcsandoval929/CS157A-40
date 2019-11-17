@@ -89,6 +89,7 @@ export function SignIn() {
     control={<Checkbox value="remember" color="primary" />}
     label="Remember me"
     />
+    <ThemeProvider theme={theme}>
     <Button
     type="submit"
     fullWidth
@@ -98,6 +99,7 @@ export function SignIn() {
     >
     Sign In
     </Button>
+    </ThemeProvider>
     <Grid container>
     <Grid item xs>
     <Link href="#" variant="body2">

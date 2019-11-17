@@ -1,57 +1,70 @@
 import React from "react";
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import { BrowserRouter as Router, withRouter } from 'react-router-dom'
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import { teal } from '@material-ui/core/colors';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import Button from "@material-ui/core/Button";
-import CardActions from "@material-ui/core/CardActions";
-import Paper from '@material-ui/core/Paper';
-import { Link } from "react-router-dom";
-import "typeface-roboto";
+import { Link } from 'react-router-dom';
 
-const headerStyle = {
-    color: "#072F5F",
-    fontSize: "100px",
-    fontWeight: "normal",
-    fontFamily: "roboto"
-};
-const buttonStyle = {
-    //marginTop: "10px",
-    fontSize: "20px",
-    padding: "20px",
-    fontWeight: "normal",
-};
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
+  },
+}));
 
-class home extends React.Component {
-    render() {
 
-        return (
+const theme = createMuiTheme({
+  palette: {
+    primary: teal,
+    secondary: teal
+  },
+});
+
+export default function NavBar(){
+  const classes = useStyles()
+
+  return(
+    <div className = {classes.root}>
+    <ThemeProvider theme = {theme}>
+      <AppBar position = "static" color = "primary">
+        <Toolbar>
+          <Typography variant="h6" className={classes.title}>
+            FlyNow
+          </Typography>
+          <Router>
             <div>
-                <h1 align="center" style={headerStyle}>
-                    FlyNow
-                    </h1>
-                <Paper>
-
-                </Paper>
-                <CardActions style={{ justifyContent: "center" }}>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        component={Link}
-                        to="/login/"
-                        style={buttonStyle}
-                    >
-                        Login
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        component={Link}
-                        to="/signup/"
-                        style={buttonStyle}
-                    >
-                        Register
-                    </Button>
-                </CardActions>
-            </div >
-        );
-    }
+            <Button
+              variant="contained"
+              color="primary"
+              component={withRouter(Link)}
+              to="/signup/"
+            >
+            SignUp
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              component={withRouter(Link)}
+              to="/signin/"
+            >
+            Login
+            </Button>
+            </div>
+            </Router>
+        </Toolbar>
+      </AppBar>
+      </ThemeProvider>
+      </div>
+  );
 }
-
-export default home;
