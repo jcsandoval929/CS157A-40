@@ -128,11 +128,6 @@ export function SignUp() {
     <React.Fragment>
     <CssBaseline />
     <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
-    <Toolbar className={classes.toolbar}>
-    <Typography variant="h5" color="inherit" align="center" noWrap className={classes.toolbarTitle}>
-    FlyNow
-    </Typography>
-    </Toolbar>
     </AppBar>
     <Container component="main" maxWidth="xs">
     <div className={classes.paper}>

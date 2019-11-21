@@ -42,7 +42,6 @@ export default function NavBar(){
           <Typography variant="h6" className={classes.title}>
             FlyNow
           </Typography>
-          <Router>
             <div>
             <Button
               variant="contained"
@@ -61,7 +60,6 @@ export default function NavBar(){
             Login
             </Button>
             </div>
-            </Router>
         </Toolbar>
       </AppBar>
       </ThemeProvider>
