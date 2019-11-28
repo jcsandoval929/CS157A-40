@@ -50,6 +50,7 @@ exports.signup = function (req, res){
       "code":200,
       "success":"user registered sucessfully"
         });
+    res.redirect('/signin');
   }
   });
 }
@@ -70,6 +71,7 @@ exports.signin = function(req,res){
           "code":200,
           "success":"Signin sucessfull"
             });
+        res.redirect('/');
       }
       else{
         res.send({
