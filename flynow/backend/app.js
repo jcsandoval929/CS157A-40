@@ -1,11 +1,9 @@
 var createError = require('http-errors');
 var express = require('express');
-var bodyParser=require('body-parser');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-var signup = require('./routes/loginroutes');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var databaseRouter = require('./routes/database');
@@ -21,11 +19,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(bodyParser.urlencoded({extended:true}));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-router.post('/signup', database.signup);
-router.post('/signin', database.signin);
+
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server running on port: ${port}`);
+})
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/database', databaseRouter);
@@ -35,9 +33,6 @@ app.use(function(req, res, next) {
   next(createError(404));
 });
 
-app.get('/flynow/src/components/login.js', function (req, res) {
-   res.sendFile( __dirname + "/" + "login.js" );
-})
 
 // error handler
 app.use(function(err, req, res, next) {

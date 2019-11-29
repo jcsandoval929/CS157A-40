@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -18,7 +17,7 @@ router.get('/', function(req, res, next){
 
 });
 
-connection.query('select * from emp', function (err, rows, fields) {
+connection.query('select * from airplanes', function (err, rows, fields) {
     if (err){
       console.log ('error');
       return
@@ -27,7 +26,7 @@ connection.query('select * from emp', function (err, rows, fields) {
     }
 });
 
-exports.signup = function (req, res){
+router.post('/register', function(req, res){
   var today = new Date();
   var users={
     "firstName":req.body.firstName,
@@ -53,9 +52,9 @@ exports.signup = function (req, res){
     res.redirect('/signin');
   }
   });
-}
+});
 
-exports.signin = function(req,res){
+router.post('/auth', function(req, res){
   var email= req.body.email;
   var password = req.body.password;
   connection.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
@@ -88,9 +87,7 @@ exports.signin = function(req,res){
     }
   }
   });
-}
-
-}
+});
 connection.end();
 });
 module.exports = router;
