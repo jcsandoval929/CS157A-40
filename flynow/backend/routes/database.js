@@ -5,28 +5,32 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'newpassword',
-  database: 'cs157a'
-});
-router.get('/', function(req, res, next){
-    connection.connect(function(err) {
-        if (err){
-        console.log ('error');
-        return
-      }
-
+  password: 'password',
+  database: 'flynow'
 });
 
-connection.query('select * from airplanes', function (err, rows, fields) {
+connection.connect(function(err){
+if(!err) {
+    console.log("Database is connected ... nn");
+} else {
+    console.log("Error connecting database ... nn");
+}
+});
+
+router.get('/users', function(req, res, next){
+  connection.query('select * from users', function (err, rows, fields){
     if (err){
       console.log ('error');
       return
     } else{
       res.send(JSON.stringify(rows));
     }
+  });
 });
 
-router.post('/register', function(req, res){
+
+
+ router.post('/register', function(req, res){
   var today = new Date();
   var users={
     "firstName":req.body.firstName,
@@ -49,12 +53,12 @@ router.post('/register', function(req, res){
       "code":200,
       "success":"user registered sucessfully"
         });
-    res.redirect('/signin');
+        res.redirect('/users');
   }
   });
 });
 
-router.post('/auth', function(req, res){
+router.post('/auth', function(req, res) {
   var email= req.body.email;
   var password = req.body.password;
   connection.query('SELECT * FROM users WHERE email = ?',[email], function (error, results, fields) {
@@ -70,7 +74,7 @@ router.post('/auth', function(req, res){
           "code":200,
           "success":"Signin sucessfull"
             });
-        res.redirect('/');
+            res.redirect('/users');
       }
       else{
         res.send({
@@ -87,7 +91,5 @@ router.post('/auth', function(req, res){
     }
   }
   });
-});
-connection.end();
 });
 module.exports = router;
