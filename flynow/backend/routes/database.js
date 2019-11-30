@@ -53,7 +53,7 @@ router.get('/users', function(req, res, next){
       "code":200,
       "success":"user registered sucessfully"
         });
-        res.redirect('/users');
+  //      res.redirect('/users');
   }
   });
 });
@@ -74,7 +74,7 @@ router.post('/auth', function(req, res) {
           "code":200,
           "success":"Signin sucessfull"
             });
-            res.redirect('/users');
+//            res.redirect('/users');
       }
       else{
         res.send({

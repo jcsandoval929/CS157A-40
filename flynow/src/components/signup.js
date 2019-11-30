@@ -1,21 +1,17 @@
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-import { teal } from "@material-ui/core/colors";
+import useForm from "react-hook-form";
+import Axios from 'axios';
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -47,10 +43,21 @@ const theme = createMuiTheme({
     //primary: teal
   }
 });
-
 export default function SignUp() {
   const classes = useStyles();
-
+  const { handleSubmit, register } = useForm({
+    defaultValues: {
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: ""
+    }
+  });
+  const onSubmit = (data) =>  {
+    console.log(data)
+    Axios.post('http://localhost:5000/database/register', data)
+      .then(res => console.log(res.data));
+  }
   return (
     <React.Fragment>
       <CssBaseline />
@@ -62,53 +69,71 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className={classes.form} noValidate>
+          <form className={classes.form} onSubmit = {handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
+              <div className = "SignupForm">
+                <label className = "SignupFormLabel" htmlFor="firstName">First Name</label>
+                <input
+                type = "firstName"
+                id = "firstName"
+                ref = {register({
+                        required: true
+                })}
+                className = "SignupFormInput"
+                placeholder = "Enter your First Name"
+                name = "firstName"
+                required
                 />
+              </div>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
+              <div className = "SignupForm">
+                <label className = "SignupFormLabel" htmlFor="lastName">Last Name</label>
+                <input
+                type = "lastName"
+                id = "lastName"
+                ref = {register({
+                        required: true
+                })}
+                className = "SignupFormInput"
+                placeholder = "Enter your Last Name"
+                name = "lastName"
+                required
                 />
+              </div>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
+              <div className = "SignupForm">
+                <label className = "SignupFormLabel" htmlFor="email">Email</label>
+                <input
+                type = "email"
+                id = "email"
+                ref = {register({
+                        required: true
+                })}
+                className = "SignupFormInput"
+                placeholder = "Enter your Email"
+                name = "email"
+                required
                 />
+              </div>
               </Grid>
               <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
+              <div className = "SignupForm">
+                <label className = "SignupFormLabel" htmlFor="password">Password</label>
+                <input
+                type = "password"
+                id = "password"
+                ref = {register({
+                        required: true
+                })}
+                className = "SignupFormInput"
+                placeholder = "Enter your Password"
+                name = "password"
+                required
                 />
+              </div>
               </Grid>
             </Grid>
             <ThemeProvider theme={theme}>
