@@ -4,6 +4,30 @@ import Button from "@material-ui/core/Button";
 import "typeface-roboto";
 
 class stats extends React.Component {
+
+  constructor(props)
+  {
+    super(props)
+    this.state = {
+      flights: []
+    }
+  }
+
+  componentDidMount(){
+    let self = this;
+    fetch('/flights', {
+      method: 'GET'}).then(function(response) {
+        if(response.status >=400){
+          throw new Error("bad response from server");
+        }
+        return response.json();
+      }).then(function(data){
+        self.setState({flights : data});
+      }).catch(err => {
+        console.log('caught it', err);
+      })
+    }
+  
   render() {
     return (
       <div>
@@ -19,10 +43,8 @@ class stats extends React.Component {
           Stats
         </h1>
         <hr size="100px" />
-     
-      <div className="container"> 
-      <div className="panel panel-default p50 uth-panel">
-        
+        <div className="container"> 
+        <div className="panel panel-default p50 uth-panel">
           <table className="table table-hover">
               <thead>
                   <tr>
@@ -33,11 +55,21 @@ class stats extends React.Component {
                       <th> Max Capacity</th>
                   </tr>
               </thead>
+              <tbody>
+                {this.state.flights.map(fi =>
+                <tr>{fi.flightNumber}
+                <td>{fi.origin}</td>
+                <td>{fi.destination}</td>
+                <td>{fi.capacity}</td>
+                </tr>
+                )}
+              </tbody>
               
           </table>
       </div>
       </div>
       </div>
+     
   
     );
   }
