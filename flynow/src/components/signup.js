@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import useForm from "react-hook-form";
-import Axios from 'axios';
+import Axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -47,17 +47,18 @@ export default function SignUp() {
   const classes = useStyles();
   const { handleSubmit, register } = useForm({
     defaultValues: {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: ""
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: ""
     }
   });
-  const onSubmit = (data) =>  {
-    console.log(data)
-    Axios.post('http://localhost:5000/database/register', data)
-      .then(res => console.log(res.data));
-  }
+  const onSubmit = data => {
+    console.log(data);
+    Axios.post("http://localhost:5000/database/register", data).then(res => {
+      console.log(res.data);
+    });
+  };
   return (
     <React.Fragment>
       <CssBaseline />
@@ -69,71 +70,79 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <form className={classes.form} onSubmit = {handleSubmit(onSubmit)}>
+          <form className={classes.form} onSubmit={handleSubmit(onSubmit)}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-              <div className = "SignupForm">
-                <label className = "SignupFormLabel" htmlFor="firstName">First Name</label>
-                <input
-                type = "firstName"
-                id = "firstName"
-                ref = {register({
-                        required: true
-                })}
-                className = "SignupFormInput"
-                placeholder = "Enter your First Name"
-                name = "firstName"
-                required
-                />
-              </div>
+                <div className="SignupForm">
+                  <label className="SignupFormLabel" htmlFor="firstName">
+                    First Name
+                  </label>
+                  <input
+                    type="firstName"
+                    id="firstName"
+                    ref={register({
+                      required: true
+                    })}
+                    className="SignupFormInput"
+                    placeholder="Enter your First Name"
+                    name="firstName"
+                    required
+                  />
+                </div>
               </Grid>
               <Grid item xs={12} sm={6}>
-              <div className = "SignupForm">
-                <label className = "SignupFormLabel" htmlFor="lastName">Last Name</label>
-                <input
-                type = "lastName"
-                id = "lastName"
-                ref = {register({
-                        required: true
-                })}
-                className = "SignupFormInput"
-                placeholder = "Enter your Last Name"
-                name = "lastName"
-                required
-                />
-              </div>
+                <div className="SignupForm">
+                  <label className="SignupFormLabel" htmlFor="lastName">
+                    Last Name
+                  </label>
+                  <input
+                    type="lastName"
+                    id="lastName"
+                    ref={register({
+                      required: true
+                    })}
+                    className="SignupFormInput"
+                    placeholder="Enter your Last Name"
+                    name="lastName"
+                    required
+                  />
+                </div>
               </Grid>
               <Grid item xs={12}>
-              <div className = "SignupForm">
-                <label className = "SignupFormLabel" htmlFor="email">Email</label>
-                <input
-                type = "email"
-                id = "email"
-                ref = {register({
-                        required: true
-                })}
-                className = "SignupFormInput"
-                placeholder = "Enter your Email"
-                name = "email"
-                required
-                />
-              </div>
+                <div className="SignupForm">
+                  <label className="SignupFormLabel" htmlFor="email">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    id="email"
+                    ref={register({
+                      required: true
+                    })}
+                    className="SignupFormInput"
+                    placeholder="Enter your Email"
+                    name="email"
+                    required
+                  />
+                </div>
               </Grid>
               <Grid item xs={12}>
-              <div className = "SignupForm">
-                <label className = "SignupFormLabel" htmlFor="password">Password</label>
-                <input
-                type = "password"
-                id = "password"
-                ref = {register({
-                        required: true
-                })}
-                className = "SignupFormInput"
-                placeholder = "Enter your Password"
-                name = "password"
-                required
-                />
-              </div>
+                <div className="SignupForm">
+                  <label className="SignupFormLabel" htmlFor="password">
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    id="password"
+                    ref={register({
+                      required: true
+                    })}
+                    className="SignupFormInput"
+                    placeholder="Enter your Password"
+                    name="password"
+                    required
+                  />
+                </div>
               </Grid>
             </Grid>
             <ThemeProvider theme={theme}>
