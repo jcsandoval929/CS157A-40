@@ -43,7 +43,7 @@ class ButtonAppBar extends React.Component {
                 color="inherit"
                 className={classes.grow}
                 component={Link}
-                to="/home/"
+                to="/"
               >
                 Flynow
               </Typography>

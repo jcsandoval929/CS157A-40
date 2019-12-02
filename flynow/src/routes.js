@@ -6,6 +6,9 @@ import Home from "./components/home";
 import Signup from "./components/signup";
 import Dashboard from "./components/dashboard";
 import Admin_Dashboard from "./components/admin_dashboard";
+import Search from "./components/search";
+import Records from "./components/records";
+import Stats from "./components/stats";
 
 const BaseRouter = () => (
   <div>
@@ -14,6 +17,9 @@ const BaseRouter = () => (
     <Route exact path="/signup/" component={Signup} />
     <Route exact path="/dashboard/" component={Dashboard} />
     <Route exact path="/admin_dashboard/" component={Admin_Dashboard} />
+    <Route exact path="/search/" component={Search} />
+    <Route exact path="/records/" component={Records} />
+    <Route exact path="/stats/" component={Stats} />
   </div>
 );
 
