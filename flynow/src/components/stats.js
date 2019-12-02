@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
+//import Modal from 'react-modal';
 import "typeface-roboto";
 
 class stats extends React.Component {
@@ -18,9 +19,29 @@ class stats extends React.Component {
           Stats
         </h1>
         <hr size="100px" />
+     
+      <div className="container"> 
+      <div className="panel panel-default p50 uth-panel">
+        
+          <table className="table table-hover">
+              <thead>
+                  <tr>
+                      <th>Flight Number</th>
+                      <th>Origin</th>
+                      <th>Destination</th>
+                      <th>Seats Available</th>
+                      <th> Max Capacity</th>
+                  </tr>
+              </thead>
+              
+          </table>
       </div>
+      </div>
+      </div>
+  
     );
   }
 }
+
 
 export default stats;
