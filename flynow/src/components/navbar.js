@@ -38,8 +38,14 @@ class ButtonAppBar extends React.Component {
         <ThemeProvider theme={theme}>
           <AppBar position="static" color="primary">
             <Toolbar>
-              <Typography variant="h6" className={classes.title}>
-                FlyNow
+              <Typography
+                variant="h6"
+                color="inherit"
+                className={classes.grow}
+                component={Link}
+                to="/"
+              >
+                Flynow
               </Typography>
               <div>
                 <Button

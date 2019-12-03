@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
 import "typeface-roboto";
 
-class dashboard extends React.Component {
+class admin_dashboard extends React.Component {
   render() {
     return (
       <div>
@@ -17,43 +17,39 @@ class dashboard extends React.Component {
             paddingTop: "10px"
           }}
         >
-          Welcome!
+          Welcome administrator!
         </h1>
         <hr size="100px" />
         <CardActions style={{ justifyContent: "center", paddingTop: "45px" }}>
           <Button
             style={{
-              maxWidth: "250px",
+              maxWidth: "270px",
               maxHeight: "60px",
-              minWidth: "240px",
+              minWidth: "260px",
               minHeight: "60px",
               fontSize: "24px"
             }}
             variant="contained"
             color="primary"
             component={Link}
-            to="/search/"
+            to="/create_delete/"
           >
-            Search Flights
+            Creation/Deletion
           </Button>
           <Button
             style={{
-              maxWidth: "170px",
+              maxWidth: "140px",
               maxHeight: "60px",
-              minWidth: "170px",
+              minWidth: "140px",
               minHeight: "60px",
               fontSize: "24px"
             }}
             variant="contained"
             color="primary"
             component={Link}
-<<<<<<< HEAD
-            to="/bookings/"
-=======
-            to="/records/"
->>>>>>> a1b06f0900a7d107c428b6122efa092f1e53aa3f
+            to="/stats/"
           >
-            Records
+            Stats
           </Button>
         </CardActions>
       </div>
@@ -61,4 +57,4 @@ class dashboard extends React.Component {
   }
 }
 
-export default dashboard;
+export default admin_dashboard;

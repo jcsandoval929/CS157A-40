@@ -123,4 +123,14 @@ router.post('/auth', function(req, res) {
   }
   });
 });
+
+router.get('/flights', function(req, res, next){
+  res.locals.connection.query('select * from flights', function(error, results, fields)
+  {
+    if(error)
+    throw error;
+    res.send(JSON.stringify(results));
+  });
+});
+
 module.exports = router;
