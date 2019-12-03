@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-import React, { useState } from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
-import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
-import useForm from "react-hook-form";
-import { useHistory } from "react-router-dom";
-import Axios from 'axios';
-=======
 import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -27,7 +11,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useForm from "react-hook-form";
 import Axios from "axios";
->>>>>>> a1b06f0900a7d107c428b6122efa092f1e53aa3f
 
 function Copyright() {
   return (
@@ -75,25 +58,12 @@ export default function SignIn() {
       password: ""
     }
   });
-<<<<<<< HEAD
-  const onSubmit = (data) =>  {
-    console.log(data)
-    Axios.post('http://localhost:5000/database/auth', data)
-      .then(res => {
-        if(res.status === 200) {
-          setRedirect(true);
-        }
-        console.log(res.data);
-      });
-  }
-=======
   const onSubmit = data => {
     console.log(data);
     Axios.post("http://localhost:5000/database/auth", data).then(res => {
       console.log(res.data);
     });
   };
->>>>>>> a1b06f0900a7d107c428b6122efa092f1e53aa3f
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -110,7 +80,6 @@ export default function SignIn() {
               Email
             </label>
             <input
-<<<<<<< HEAD
             type = "email"
             id = "email"
             ref = {register({
@@ -121,17 +90,6 @@ export default function SignIn() {
             placeholder = "Enter your Email"
             name = "email"
             required
-=======
-              type="email"
-              id="email"
-              ref={register({
-                required: true
-              })}
-              className="loginFormInput"
-              placeholder="Enter your Email"
-              name="email"
-              required
->>>>>>> a1b06f0900a7d107c428b6122efa092f1e53aa3f
             />
           </div>
           <div className="loginForm">

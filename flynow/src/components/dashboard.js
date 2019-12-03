@@ -47,11 +47,7 @@ class dashboard extends React.Component {
             variant="contained"
             color="primary"
             component={Link}
-<<<<<<< HEAD
             to="/bookings/"
-=======
-            to="/records/"
->>>>>>> a1b06f0900a7d107c428b6122efa092f1e53aa3f
           >
             Records
           </Button>

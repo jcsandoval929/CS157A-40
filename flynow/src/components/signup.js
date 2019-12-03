@@ -108,7 +108,6 @@ export default function SignUp() {
                 </div>
               </Grid>
               <Grid item xs={12}>
-<<<<<<< HEAD
               <div className = "SignupForm">
                 <label className = "SignupFormLabel" htmlFor="email">Email</label>
                 <input
@@ -124,24 +123,6 @@ export default function SignUp() {
                 required
                 />
               </div>
-=======
-                <div className="SignupForm">
-                  <label className="SignupFormLabel" htmlFor="email">
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    ref={register({
-                      required: true
-                    })}
-                    className="SignupFormInput"
-                    placeholder="Enter your Email"
-                    name="email"
-                    required
-                  />
-                </div>
->>>>>>> a1b06f0900a7d107c428b6122efa092f1e53aa3f
               </Grid>
               <Grid item xs={12}>
                 <div className="SignupForm">
