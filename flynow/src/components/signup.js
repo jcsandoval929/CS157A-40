@@ -110,7 +110,8 @@ export default function SignUp() {
                 type = "email"
                 id = "email"
                 ref = {register({
-                        required: true
+                        required: true,
+                        pattern: /^\S+@\S+$/i
                 })}
                 className = "SignupFormInput"
                 placeholder = "Enter your Email"

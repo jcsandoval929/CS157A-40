@@ -29,6 +29,38 @@ router.get('/users', function(req, res, next){
 });
 
 
+//Bookings
+router.get('/bookings', function(req, res, next) {
+    connection.query('select * from bookings', function (error, results, fields) {
+        if(error) throw error;
+        res.send(JSON.stringify(results));
+    });
+});
+
+router.post('/addBookings', function(req, res){
+ var bookings={
+   "bookingID":req.body.bookingID,
+   "firstName":req.body.firstName,
+   "lastName":req.body.lastName,
+   "email":req.body.email,
+   "payment":req.body.payment
+ }
+ connection.query('INSERT INTO bookings SET ?',bookings, function (error, results, fields) {
+ if (error) {
+   console.log("error ocurred",error);
+   res.send({
+     "code":400,
+     "failed":"error ocurred"
+   })
+ }else{
+   console.log('The solution is: ', results);
+   res.send({
+     "code":200,
+     "success":"Booking successful"
+       });
+ }
+ });
+});
 
  router.post('/register', function(req, res){
   var today = new Date();
@@ -53,7 +85,6 @@ router.get('/users', function(req, res, next){
       "code":200,
       "success":"user registered sucessfully"
         });
-  //      res.redirect('/users');
   }
   });
 });

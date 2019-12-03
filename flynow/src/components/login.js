@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import useForm from "react-hook-form";
+import { useHistory } from "react-router-dom";
 import Axios from 'axios';
 
 function Copyright() {
@@ -50,6 +51,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 export default function SignIn() {
+  const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -60,7 +62,12 @@ export default function SignIn() {
   const onSubmit = (data) =>  {
     console.log(data)
     Axios.post('http://localhost:5000/database/auth', data)
-      .then(res => console.log(res.data));
+      .then(res => {
+        if(res.status === 200) {
+          setRedirect(true);
+        }
+        console.log(res.data);
+      });
   }
   return (
     <Container component="main" maxWidth="xs">
@@ -79,7 +86,8 @@ export default function SignIn() {
             type = "email"
             id = "email"
             ref = {register({
-                    required: true
+                    required: true,
+                    pattern: /^\S+@\S+$/i
             })}
             className = "loginFormInput"
             placeholder = "Enter your Email"
