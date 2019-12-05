@@ -11,6 +11,7 @@ import { teal } from "@material-ui/core/colors";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import Axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,9 +32,10 @@ const theme = createMuiTheme({
     secondary: teal
   }
 });
-export default function App(props){
+function App(props){
   function handleLogout() {
     userHasAuthenticated(false);
+    props.history.push("/login");
   }
     const classes = useStyles();
     const [isAuthenticating, setIsAuthenticating] = useState(true);
@@ -81,5 +83,5 @@ export default function App(props){
                 <BaseRouter appProps={{ isAuthenticated, userHasAuthenticated }} />
             </div>
           );
-
 }
+export default withRouter(App);
