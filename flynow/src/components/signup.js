@@ -11,6 +11,7 @@ import Container from "@material-ui/core/Container";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import useForm from "react-hook-form";
 import Axios from "axios";
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   "@global": {
@@ -42,7 +43,7 @@ const theme = createMuiTheme({
     //primary: teal
   }
 });
-export default function SignUp() {
+export default function SignUp(props) {
   const classes = useStyles();
   const { handleSubmit, register } = useForm({
     defaultValues: {
@@ -56,6 +57,7 @@ export default function SignUp() {
     console.log(data);
     Axios.post("http://localhost:5000/database/register", data).then(res => {
       console.log(res.data);
+      props.history.push('/login');
     });
   };
   return (

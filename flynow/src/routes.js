@@ -1,6 +1,6 @@
 import React from "react";
-import { Route } from "react-router-dom";
-
+import { Route, Switch } from "react-router-dom";
+import AppliedRoute from "./components/AppliedRoute";
 import Login from "./components/login";
 import Home from "./components/home";
 import Signup from "./components/signup";
@@ -10,17 +10,17 @@ import Search from "./components/search";
 import Bookings from "./components/bookings";
 import Stats from "./components/stats";
 
-const BaseRouter = () => (
-  <div>
-    <Route exact path="/" component={Home} />
-    <Route exact path="/login/" component={Login} />
-    <Route exact path="/signup/" component={Signup} />
-    <Route exact path="/dashboard/" component={Dashboard} />
-    <Route exact path="/admin_dashboard/" component={Admin_Dashboard} />
-    <Route exact path="/search/" component={Search} />
-    <Route exact path="/bookings/" component={Bookings} />
-    <Route exact path="/stats/" component={Stats} />
-  </div>
-);
-
-export default BaseRouter;
+export default function Routes({ appProps }) {
+  return (
+  <Switch>
+    <AppliedRoute path="/" exact component={Home} appProps={appProps}/>
+    <AppliedRoute path="/login/" exact component={Login} appProps={appProps}/>
+    <AppliedRoute path="/signup/" exact component={Signup} appProps={appProps} />
+    <AppliedRoute path="/dashboard/" exact component={Dashboard} appProps={appProps} />
+    <AppliedRoute path="/admin_dashboard/" exact component={Admin_Dashboard} appProps={appProps} />
+    <AppliedRoute path="/search/" exact component={Search} appProps={appProps} />
+    <AppliedRoute path="/bookings/" exact component={Bookings} appProps={appProps} />
+    <AppliedRoute path="/stats/" exact component={Stats} appProps={appProps} />
+  </Switch>
+  );
+}

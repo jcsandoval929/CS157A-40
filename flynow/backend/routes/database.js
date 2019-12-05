@@ -110,14 +110,14 @@ router.post('/auth', function(req, res) {
       else{
         res.send({
           "code":204,
-          "success":"Email and password does not match"
+          "error":"Email and password does not match"
             });
       }
     }
     else{
       res.send({
         "code":204,
-        "success":"Email does not exits"
+        "error":"Email does not exits"
           });
     }
   }

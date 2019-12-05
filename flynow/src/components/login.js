@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect }  from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,6 +11,12 @@ import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useForm from "react-hook-form";
 import Axios from "axios";
+import { useHistory } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route, Redirect
+} from "react-router-dom";
 
 function Copyright() {
   return (
@@ -49,21 +55,48 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(3, 0, 2)
   }
 }));
-export default function SignIn() {
+export default function SignIn(props) {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
   const classes = useStyles();
-  const { handleSubmit, register } = useForm({
-    defaultValues: {
-      email: "",
-      password: ""
-    }
-  });
+  const { handleSubmit, register } = useForm();
   const onSubmit = data => {
-    console.log(data);
-    Axios.post("http://localhost:5000/database/auth", data).then(res => {
-      console.log(res.data);
-    });
-  };
+   Axios.post("http://localhost:5000/database/auth", {email, password}).then(res => {
+     console.log(res.data);
+     if(res.data.code == 200){
+      props.userHasAuthenticated(true);
+      props.history.push('/dashboard');
+    } else{
+      props.history.push('/login');
+    }
+   });
+ };
+//   async function handleSubmit(event) {
+//     event.preventDefault();
+//     try {
+//       await Axios.post("http://localhost:5000/database/auth", {email, password})
+//       .then(function (response) {
+//     console.log(response);
+//   });
+//       props.userHasAuthenticated(true);
+//       props.history.push("/dashboard");
+//     } catch (e) {
+//     alert(e.message);
+//   }
+// }
+  // const onSubmit = data => {
+  //   console.log(data);
+  //   Axios.post("http://localhost:5000/database/auth", data).then(res => {
+  //     console.log(res.data);
+  //     if(res.data.success){
+  //         <Redirect to='/dashboard'/>
+  //     }else if(res.data.error){
+  //       return false;
+  //     }
+  //   });
+  // };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -82,10 +115,8 @@ export default function SignIn() {
             <input
             type = "email"
             id = "email"
-            ref = {register({
-                    required: true,
-                    pattern: /^\S+@\S+$/i
-            })}
+            value = {email}
+            onChange={e => setEmail(e.target.value)}
             className = "loginFormInput"
             placeholder = "Enter your Email"
             name = "email"
@@ -99,24 +130,13 @@ export default function SignIn() {
             <input
               type="password"
               id="password"
-              ref={register({
-                required: true
-              })}
               className="loginFormInput"
               placeholder="Enter your password"
               name="password"
+              value = {password}
+              onChange={e => setPassword(e.target.value)}
               required
             />
-          </div>
-          <div className="loginForm">
-            <label className="loginFormCheckBoxLabel">
-              <input
-                type="checkbox"
-                className="loginFormCheckBoxInput"
-                name="remember"
-              />
-              Remember Me
-            </label>
           </div>
           <div className="loginForm">
             <Button
@@ -130,13 +150,8 @@ export default function SignIn() {
             </Button>
           </div>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
+              <Link href="/signup" variant="body2">
                 {"Don't have an account? Sign Up"}
               </Link>
             </Grid>
