@@ -5,7 +5,7 @@ var mysql = require('mysql');
 var connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'password',
+  password: 'newpassword',
   database: 'flynow'
 });
 
@@ -132,5 +132,17 @@ router.get('/flights', function(req, res, next){
     res.send(JSON.stringify(results));
   });
 });
+
+router.get('/flightstwo', function(req, res, next){
+  connection.query('SELECT * FROM flightstwo', function(error, rows, fields)
+  {
+    if(error)
+    throw error;
+    res.send(JSON.stringify(rows));
+  });
+});
+
+
+
 
 module.exports = router;

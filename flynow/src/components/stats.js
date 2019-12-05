@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-//import Modal from 'react-modal';
 import "typeface-roboto";
 
 class stats extends React.Component {
@@ -9,20 +8,20 @@ class stats extends React.Component {
   {
     super(props)
     this.state = {
-      flights: []
+      flightstwo: []
     }
   }
-
+      
   componentDidMount(){
     let self = this;
-    fetch('/flights', {
+    fetch("http://localhost:5000/database/flightstwo", {
       method: 'GET'}).then(function(response) {
         if(response.status >=400){
           throw new Error("bad response from server");
         }
         return response.json();
       }).then(function(data){
-        self.setState({flights : data});
+        self.setState({flightstwo : data});
       }).catch(err => {
         console.log('caught it', err);
       })
@@ -42,38 +41,47 @@ class stats extends React.Component {
         >
           Stats
         </h1>
-        <hr size="100px" />
         <div className="container"> 
         <div className="panel panel-default p50 uth-panel">
           <table className="table table-hover">
               <thead>
                   <tr>
-                      <th>Flight Number</th>
-                      <th>Origin</th>
-                      <th>Destination</th>
-                      <th>Seats Available</th>
-                      <th> Max Capacity</th>
+                      <th> Flight Number</th>
+                      <th> Origin</th>
+                      <th> Destination</th>
+                      <th> Date and Time </th>
+                      <th> Plane Capacity</th>
+                      <th> Seats Available</th>
                   </tr>
               </thead>
               <tbody>
-                {this.state.flights.map(fi =>
-                <tr>{fi.flightNumber}
+                {this.state.flightstwo.map(fi =>
+                <tr>{fi.flightNo}
                 <td>{fi.origin}</td>
                 <td>{fi.destination}</td>
-                <td>{fi.capacity}</td>
+                <td>{fi.date_time}</td>
+                <td>{fi.maxcapacity}</td>
+                <td>{fi.availability}</td>
+                
                 </tr>
                 )}
               </tbody>
-              
-          </table>
-      </div>
-      </div>
-      </div>
-     
-  
+
+              </table>
+
+      
+     {/* <ul>
+       {this.state.flights.map(flight =>(
+         <li>
+           <h2>{flight.flightNo}</h2>
+           <h3>{flight.origin}</h3>
+         </li>
+       ))}</ul> */}
+   </div>
+   </div>
+   </div>
     );
   }
 }
-
 
 export default stats;
