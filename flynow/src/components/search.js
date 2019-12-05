@@ -11,7 +11,7 @@ class search extends React.Component {
       flightNo: 0,
       origin: "",
       destination: "",
-      flights: []
+      flights: undefined
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleClick = this.handleClick.bind(this);
@@ -33,7 +33,11 @@ class search extends React.Component {
       .then(function(response) {
         // handle success
         console.log(response);
-        self.setState({ flights: response.data });
+        if (response.data.code !== 204) {
+          self.setState({ flights: response.data });
+        } else {
+          self.setState({ flights: undefined });
+        }
       })
       .catch(error => {
         // handle error
@@ -72,13 +76,6 @@ class search extends React.Component {
       });
   }
 
-  //   onSubmit(data) {
-  //     console.log(data);
-  //     Axios.post("http://localhost:5000/database/search", data).then(res => {
-  //       console.log(res.data);
-  //     });
-  //   }
-
   //   handleSubmit(event) {
   //     event.preventDefault();
   //     var self = this;
@@ -107,27 +104,9 @@ class search extends React.Component {
   //       });
   //   }
 
-  //   componentDidMount() {
-  //     let self = this;
-  //     fetch("http://localhost:5000/database/flights", {
-  //       method: "GET"
-  //     })
-  //       .then(function(response) {
-  //         if (response.status >= 400) {
-  //           throw new Error("Bad server response");
-  //         }
-  //         return response.json();
-  //       })
-  //       .then(function(data) {
-  //         self.setState({ flights: data });
-  //       })
-  //       .catch(err => {
-  //         console.log("Error:", err);
-  //       });
-  //   }
-
   render() {
     Moment.locale("en");
+    const flights = this.state.flights;
     return (
       <div>
         <h1
@@ -164,29 +143,45 @@ class search extends React.Component {
             value="Search"
           />
         </form>
-        <ul>
-          {this.state.flights.map(flight => (
-            <li key={flight.flightNo}>
-              <h2>
-                {flight.origin} to {flight.destination}
-              </h2>
-              <p>{Moment(flight.date_time).format("LLLL")}</p>
-              <p>Flight Number: {flight.flightNo}</p>
-              <p>Cost: ${flight.cost}</p>
-              <button
-                type="button"
-                onClick={() => this.handleChoose(flight.flightNo)}
-              >
-                Select
+        {typeof flights !== "undefined" ? (
+          <div>
+            <ul>
+              {this.state.flights.map(flight => (
+                <li key={flight.flightNo}>
+                  <h2>
+                    {flight.origin} to {flight.destination}
+                  </h2>
+                  <p>{Moment(flight.date_time).format("LLLL")}</p>
+                  <p>Flight Number: {flight.flightNo}</p>
+                  <p>Cost: ${flight.cost}</p>
+                  <button
+                    type="button"
+                    onClick={() => this.handleChoose(flight.flightNo)}
+                  >
+                    Select
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <div align="center">
+              <button type="button" onClick={e => this.handleClick(e)}>
+                Book
               </button>
-            </li>
-          ))}
-        </ul>
-        <div align="center">
-          <button type="button" onClick={e => this.handleClick(e)}>
-            Book
-          </button>
-        </div>
+            </div>
+          </div>
+        ) : (
+          <h1
+            align="center"
+            style={{
+              fontFamily: "roboto",
+              fontSize: "24px",
+              fontWeight: "normal",
+              paddingTop: "10px"
+            }}
+          >
+            No flights found
+          </h1>
+        )}
       </div>
     );
   }
