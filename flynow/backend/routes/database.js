@@ -3,17 +3,10 @@ var router = express.Router();
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-<<<<<<< HEAD
   host: 'localhost',
   user: 'root',
   password: 'password',
   database: 'flynow'
-=======
-  host: "localhost",
-  user: "root",
-  password: "password",
-  database: "flynow"
->>>>>>> 77bc9a393981e37bff10880e11b956082ee4a488
 });
 
 connection.connect(function(err) {
@@ -59,21 +52,21 @@ router.post("/book", function(req, res) {
 
 //Bookings
 router.get("/bookings", function(req, res, next) {
-  connection.query("select * from bookings", function(error, results, fields) {
+  connection.query("select * from records", function(error, results, fields) {
     if (error) throw error;
     res.send(JSON.stringify(results));
   });
 });
 
 router.post("/addBookings", function(req, res) {
-  var bookings = {
-    bookingID: req.body.bookingID,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    payment: req.body.payment
+  var records = {
+    flightNo: req.body.flightNo,
+    origin: req.body.origin,
+    destination: req.body.destination,
+    date_time: req.body.date_time,
+    cost: req.body.cost
   };
-  connection.query("INSERT INTO bookings SET ?", bookings, function(
+  connection.query("INSERT INTO records SET ?", records, function(
     error,
     results,
     fields
