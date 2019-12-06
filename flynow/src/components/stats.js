@@ -1,87 +1,131 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import "typeface-roboto";
+import React, { useState, useEffect } from "react";
+import { withStyles, makeStyles } from "@material-ui/core/styles";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import Paper from "@material-ui/core/Paper";
+import axios from "axios";
 
-class stats extends React.Component {
+const StyledTableCell = withStyles(theme => ({
+  head: {
+    backgroundColor: theme.palette.common.black,
+    color: theme.palette.common.white
+  },
+  body: {
+    fontSize: 14
+  }
+}))(TableCell);
 
-  constructor(props)
-  {
-    super(props)
-    this.state = {
-      flightstwo: []
+const StyledTableRow = withStyles(theme => ({
+  root: {
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.background.default
     }
   }
-      
-  componentDidMount(){
-    let self = this;
-    fetch("http://localhost:5000/database/flightstwo", {
-      method: 'GET'}).then(function(response) {
-        if(response.status >=400){
-          throw new Error("bad response from server");
-        }
-        return response.json();
-      }).then(function(data){
-        self.setState({flightstwo : data});
-      }).catch(err => {
-        console.log('caught it', err);
-      })
-    }
-  
-  render() {
-    return (
-      <div>
-        <h1
-          align="center"
-          style={{
-            fontFamily: "roboto",
-            fontSize: "48px",
-            fontWeight: "normal",
-            paddingTop: "10px"
-          }}
-        >
-          Stats
-        </h1>
-        <div className="container"> 
-        <div className="panel panel-default p50 uth-panel">
-          <table className="table table-hover">
-              <thead>
-                  <tr>
-                      <th> Flight Number</th>
-                      <th> Origin</th>
-                      <th> Destination</th>
-                      <th> Date and Time </th>
-                      <th> Plane Capacity</th>
-                      <th> Seats Available</th>
-                  </tr>
-              </thead>
-              <tbody>
-                {this.state.flightstwo.map(fi =>
-                <tr>{fi.flightNo}
-                <td>{fi.origin}</td>
-                <td>{fi.destination}</td>
-                <td>{fi.date_time}</td>
-                <td>{fi.maxcapacity}</td>
-                <td>{fi.availability}</td>
-                
-                </tr>
-                )}
-              </tbody>
+}))(TableRow);
 
-              </table>
-
-      
-     {/* <ul>
-       {this.state.flights.map(flight =>(
-         <li>
-           <h2>{flight.flightNo}</h2>
-           <h3>{flight.origin}</h3>
-         </li>
-       ))}</ul> */}
-   </div>
-   </div>
-   </div>
-    );
-  }
+function createData(bookingID, firstName, lastName, email, payment) {
+  return { bookingID, firstName, lastName, email, payment };
 }
 
-export default stats;
+const useStyles = makeStyles(theme => ({
+  root: {
+    width: "100%",
+    marginTop: theme.spacing(3),
+    overflowX: "auto"
+  },
+  table: {
+    minWidth: 700
+  }
+}));
+
+// const getBookings = async () => {
+// try {
+//   const res = await axios.get(`localhost:5000/database/bookings`);
+//
+//   const bookings = res.data;
+//
+//   console.log(`GET: Here's the list of bookings`, bookings);
+//
+//   return bookings;
+// } catch (e) {
+//   console.error(e);
+// }
+// };
+
+function Stats() {
+  const classes = useStyles();
+  const [flights, setFlights] = useState([]);
+  const [load, setLoad] = useState(false);
+  const [error, setError] = useState("");
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/database/flights")
+      .then(res => {
+        setFlights(res.data);
+        setLoad(true);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoad(true);
+      });
+  }, []);
+
+  function Stats2() {
+    const classes = useStyles();
+    const [airline, setAirline] = useState([]);
+    const [load, setLoad] = useState(false);
+    const [error, setError] = useState("");
+    useEffect(() => {
+      axios
+        .get("http://localhost:5000/database/airline")
+        .then(res => {
+          setAirline(res.data);
+          setLoad(true);
+        })
+        .catch(err => {
+          setError(err.message);
+          setLoad(true);
+        });
+    }, []);
+  }
+  return (
+    <Paper className={classes.root}>
+      <Table className={classes.table} aria-label="customized table">
+        <TableHead>
+          <TableRow>
+            <StyledTableCell>Airline</StyledTableCell>
+            <StyledTableCell align="right">Flight Number</StyledTableCell>
+            <StyledTableCell align="right">Origin&nbsp;</StyledTableCell>
+            <StyledTableCell align="right">Destination&nbsp;</StyledTableCell>
+            <StyledTableCell align="right">Date and Time&nbsp;</StyledTableCell>
+            <StyledTableCell align="right">Availability&nbsp;</StyledTableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {flights.map(airlines => (
+            <StyledTableRow key={airlines.name}>
+              <StyledTableCell component="th" scope="row">
+                {flights.flightNo}
+              </StyledTableCell>
+              <StyledTableCell align="right">{flights.origin}</StyledTableCell>
+              <StyledTableCell align="right">
+                {flights.destination}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {flights.date_time}
+              </StyledTableCell>
+              <StyledTableCell align="right">
+                {flights.maxcapacity}
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </Paper>
+  );
+}
+
+export default Stats;
