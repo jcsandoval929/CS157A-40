@@ -26,9 +26,6 @@ const StyledTableRow = withStyles(theme => ({
   },
 }))(TableRow);
 
-function createData(bookingID, firstName, lastName, email, payment) {
-  return {bookingID, firstName, lastName, email, payment};
-}
 
 
 const useStyles = makeStyles(theme => ({
@@ -59,13 +56,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function Bookings() {
   const classes = useStyles();
-  const [bookings, setBookings] = useState([]);
+  const [records, setRecords] = useState([]);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState('');
   useEffect(() => {
     axios.get('http://localhost:5000/database/bookings')
         .then(res => {
-          setBookings(res.data);
+          setRecords(res.data);
           setLoad(true);
         })
         .catch(err => {
@@ -78,21 +75,21 @@ export default function Bookings() {
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
-            <StyledTableCell>Booking ID</StyledTableCell>
-            <StyledTableCell align="right">First Name</StyledTableCell>
-            <StyledTableCell align="right">Last Name&nbsp;</StyledTableCell>
-            <StyledTableCell align="right">Email&nbsp;</StyledTableCell>
-            <StyledTableCell align="right">Payment&nbsp;</StyledTableCell>
+            <StyledTableCell>flightNo</StyledTableCell>
+            <StyledTableCell align="right">origin</StyledTableCell>
+            <StyledTableCell align="right">destination&nbsp;</StyledTableCell>
+            <StyledTableCell align="right">date_time&nbsp;</StyledTableCell>
+            <StyledTableCell align="right">cost&nbsp;</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {bookings.map(booking => (
-            <StyledTableRow key={booking.bookingID}>
-              <StyledTableCell component="th" scope="row">{booking.bookingID}</StyledTableCell>
-              <StyledTableCell align="right">{booking.firstName}</StyledTableCell>
-              <StyledTableCell align="right">{booking.lastName}</StyledTableCell>
-              <StyledTableCell align="right">{booking.email}</StyledTableCell>
-              <StyledTableCell align="right">{booking.payment}</StyledTableCell>
+          {records.map(record => (
+            <StyledTableRow key={record.flightNo}>
+              <StyledTableCell component="th" scope="row">{record.flightNo}</StyledTableCell>
+              <StyledTableCell align="right">{record.origin}</StyledTableCell>
+              <StyledTableCell align="right">{record.destination}</StyledTableCell>
+              <StyledTableCell align="right">{record.date_time}</StyledTableCell>
+              <StyledTableCell align="right">{record.cost}</StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
