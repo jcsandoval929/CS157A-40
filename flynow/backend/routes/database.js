@@ -3,10 +3,17 @@ var router = express.Router();
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
+<<<<<<< HEAD
+  host: 'localhost',
+  user: 'root',
+  password: 'password',
+  database: 'flynow'
+=======
   host: "localhost",
   user: "root",
   password: "password",
   database: "flynow"
+>>>>>>> 77bc9a393981e37bff10880e11b956082ee4a488
 });
 
 connection.connect(function(err) {

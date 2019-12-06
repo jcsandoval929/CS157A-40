@@ -70,6 +70,7 @@ export default function SignIn(props) {
       props.history.push('/dashboard');
     } else{
       props.history.push('/login');
+      alert('Wrong Login Credentials');
     }
    });
  };
