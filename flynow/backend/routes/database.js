@@ -52,7 +52,7 @@ router.post("/book", function(req, res) {
 
 //Bookings
 router.get("/bookings", function(req, res, next) {
-  connection.query("select * from bookings", function(error, results, fields) {
+  connection.query("select * from records", function(error, results, fields) {
     if (error) throw error;
     res.send(JSON.stringify(results));
   });
@@ -66,7 +66,7 @@ router.post("/addBookings", function(req, res) {
     email: req.body.email,
     payment: req.body.payment
   };
-  connection.query("INSERT INTO bookings SET ?", bookings, function(
+  connection.query("INSERT INTO records SET ?", bookings, function(
     error,
     results,
     fields
@@ -190,6 +190,52 @@ router.post("/search", function(req, res) {
         }
       }
       console.log(results);
+    }
+  );
+});
+
+router.post("/create", function(req, res) {
+  var flightNo = req.body.flightNo;
+  var origin = req.body.origin;
+  var destination = req.body.destination;
+  var date_time = req.body.date_time;
+  var cost = req.body.cost;
+  connection.query(
+    "INSERT INTO flights (flightNo, origin, destination, date_time, cost) VALUES (?, ?, ?, ?, ?);",
+    [flightNo, origin, destination, date_time, cost],
+    function(error, results, fields) {
+      if (error) {
+        res.send({
+          code: 400,
+          failed: "error ocurred"
+        });
+      } else {
+        res.send({
+          code: 200,
+          success: "flight registered sucessfully"
+        });
+      }
+    }
+  );
+});
+
+router.post("/delete", function(req, res) {
+  var flightNo = req.body.flightNo;
+  connection.query(
+    "DELETE FROM flights WHERE flightNo = ?",
+    [flightNo],
+    function(error, results, fields) {
+      if (error) {
+        res.send({
+          code: 400,
+          failed: "error ocurred"
+        });
+      } else {
+        res.send({
+          code: 200,
+          success: "flight removed sucessfully"
+        });
+      }
     }
   );
 });

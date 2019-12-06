@@ -146,7 +146,7 @@ class search extends React.Component {
         {typeof flights !== "undefined" ? (
           <div>
             <ul>
-              {this.state.flights.map(flight => (
+              {flights.map(flight => (
                 <li key={flight.flightNo}>
                   <h2>
                     {flight.origin} to {flight.destination}
