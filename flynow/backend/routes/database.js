@@ -3,17 +3,10 @@ var router = express.Router();
 var mysql = require("mysql");
 
 var connection = mysql.createConnection({
-<<<<<<< HEAD
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'flynow'
-=======
   host: "localhost",
   user: "root",
-  password: "password",
+  password: "newpassword",
   database: "flynow"
->>>>>>> 2174573ff282a474a2e8ae0e57a61b11ce8577ac
 });
 
 connection.connect(function(err) {
@@ -73,11 +66,7 @@ router.post("/addBookings", function(req, res) {
     date_time: req.body.date_time,
     cost: req.body.cost
   };
-<<<<<<< HEAD
-  connection.query("INSERT INTO records SET ?", records, function(
-=======
   connection.query("INSERT INTO records SET ?", bookings, function(
->>>>>>> 2174573ff282a474a2e8ae0e57a61b11ce8577ac
     error,
     results,
     fields
@@ -167,7 +156,8 @@ router.post("/auth", function(req, res) {
 });
 
 router.get("/flights", (req, res) => {
-  connection.query("SELECT * FROM flights", function(err, rows, fields) {
+  connection.query("SELECT DISTINCT a.flightNo, a.origin, a.destination,a.date_time, b.name, c.capacity FROM flights a INNER JOIN airlines b INNER JOIN airplanes c", function(err, rows, fields) {
+    console.log('we did a query');
     if (!err) {
       console.log("Success getting flights");
       res.send(JSON.stringify(rows));
